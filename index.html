@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel | Sobre mí</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { transition: background-color 0.3s ease, color 0.3s ease; }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen flex flex-col items-center justify-center px-6 py-12">
+
+  <!-- Foto de perfil -->
+  <img src="https://via.placeholder.com/120" alt="Foto de Daniel" class="rounded-full w-28 h-28 object-cover shadow-lg mb-6 transition-all duration-300 dark:grayscale" />
+
+  <!-- Contenido dinámico -->
+  <div id="contenido" class="text-center max-w-xl space-y-4">
+    <h1 class="text-3xl font-bold tracking-wide" id="titulo">DaNYsZ99</h1>
+    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed" id="descripcion">
+      EN DESARROLLO
+    </p>
+  </div>
+
+  <!-- Redes sociales -->
+  <div class="mt-8 flex flex-wrap justify-center gap-4">
+    <a href="https://twitter.com/tuusuario" target="_blank" class="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-full font-medium text-white transition">Twitter</a>
+    <a href="https://instagram.com/tuusuario" target="_blank" class="bg-pink-500 hover:bg-pink-600 px-5 py-2 rounded-full font-medium text-white transition">Instagram</a>
+    <a href="https://linkedin.com/in/tuusuario" target="_blank" class="bg-blue-700 hover:bg-blue-800 px-5 py-2 rounded-full font-medium text-white transition">LinkedIn</a>
+    <a href="mailto:tuemail@example.com" class="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-full font-medium text-white transition">Contacto</a>
+  </div>
+
+  <!-- Controles -->
+  <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+    <button onclick="toggleTheme()" class="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition">
+      Cambiar tema
+    </button>
+
+    <select onchange="cambiarIdioma(this.value)" class="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white transition">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-xs text-gray-500 dark:text-gray-400">
+    © 2025 Daniel. Hecho con cariño y café ☕
+  </footer>
+
+  <!-- Script para tema e idioma -->
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    const textos = {
+      es: {
+        descripcion: "EN DESARROLLO",
+      },
+      en: {
+        descripcion: "IN DEVELOPMENT",
+      }
+    }
+
+    function cambiarIdioma(idioma) {
+      document.getElementById("descripcion").textContent = textos[idioma].descripcion;
+    }
+  </script>
+
+</body>
+</html>
