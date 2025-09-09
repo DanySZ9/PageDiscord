@@ -1,71 +1,192 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daniel | Sobre mí</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html { transition: background-color 0.3s ease, color 0.3s ease; }
-  </style>
-</head>
-<body class="bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen flex flex-col items-center justify-center px-6 py-12">
-
-  <!-- Foto de perfil -->
-  <img src="https://via.placeholder.com/120" alt="Foto de Daniel" class="rounded-full w-28 h-28 object-cover shadow-lg mb-6 transition-all duration-300 dark:grayscale" />
-
-  <!-- Contenido dinámico -->
-  <div id="contenido" class="text-center max-w-xl space-y-4">
-    <h1 class="text-3xl font-bold tracking-wide" id="titulo">DaNYsZ99</h1>
-    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed" id="descripcion">
-      EN DESARROLLO
-    </p>
-  </div>
-
-  <!-- Redes sociales -->
-  <div class="mt-8 flex flex-wrap justify-center gap-4">
-    <a href="https://twitter.com/tuusuario" target="_blank" class="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-full font-medium text-white transition">Twitter</a>
-    <a href="https://instagram.com/tuusuario" target="_blank" class="bg-pink-500 hover:bg-pink-600 px-5 py-2 rounded-full font-medium text-white transition">Instagram</a>
-    <a href="https://linkedin.com/in/tuusuario" target="_blank" class="bg-blue-700 hover:bg-blue-800 px-5 py-2 rounded-full font-medium text-white transition">LinkedIn</a>
-    <a href="mailto:tuemail@example.com" class="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-full font-medium text-white transition">Contacto</a>
-  </div>
-
-  <!-- Controles -->
-  <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
-    <button onclick="toggleTheme()" class="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white transition">
-      Cambiar tema
-    </button>
-
-    <select onchange="cambiarIdioma(this.value)" class="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white transition">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-    </select>
-  </div>
-
-  <!-- Footer -->
-  <footer class="mt-12 text-xs text-gray-500 dark:text-gray-400">
-    © 2025 Daniel. Hecho con cariño y café ☕
-  </footer>
-
-  <!-- Script para tema e idioma -->
-  <script>
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-    }
-
-    const textos = {
-      es: {
-        descripcion: "EN DESARROLLO",
-      },
-      en: {
-        descripcion: "IN DEVELOPMENT",
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DaNYsZ99</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
-    }
+      video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+      }
+      /* Slider oculto por defecto */
+      .volume-container input[type="range"] {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      /* Se muestra solo al pasar el mouse por encima del icono/contenedor */
+      .volume-container:hover input[type="range"] {
+        opacity: 1;
+      }
 
-    function cambiarIdioma(idioma) {
-      document.getElementById("descripcion").textContent = textos[idioma].descripcion;
-    }
-  </script>
+       #blurEffect {
+          position: fixed;
+          width: 150px; /* Tamaño inicial del área borrosa */
+          height: 150px;
+          border-radius: 50%; /* Forma circular */
+          backdrop-filter: blur(10px); /* Efecto de desenfoque */
+          pointer-events: none; /* Evita que interfiera con los clics */
+          z-index: -1; /* Debe estar detrás del contenido principal */
+          transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+        }
+    </style>
+  </head>
 
-</body>
+  <body class="text-black min-h-screen relative">
+    <!-- Video de fondo + capa oscura -->
+    <video src="media/background.mp4" autoplay muted loop></video>
+    <div class="overlay"></div>
+    <div id="blurEffect"></div>
+
+    <header
+      class="w-full px-24 pt-9 pb-3 grid grid-cols-[auto_1fr_auto] items-center fixed top-0 z-10 backdrop-blur-sm bg-transparent text-white"
+    >
+      <!-- Botón de volumen -->
+      <div class="flex items-center gap-4 volume-container relative">
+        <button
+          onclick="toggleMute()"
+          class="flex items-center gap-2 px-4 py-2 rounded-full bg-transparent transition"
+        >
+          <svg
+            id="volumeIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M19 12c0-1.5-.5-2.9-1.4-4"></path>
+            <path d="M19 12c0 1.5-.5 2.9-1.4 4"></path>
+          </svg>
+        </button>
+        <input
+          type="range"
+          id="volumeSlider"
+          min="0"
+          max="100"
+          value="50"
+          class="w-40 cursor-pointer absolute left-12 overlay"
+          oninput="changeVolume(this.value)"
+        />
+      </div>
+
+      <!-- Nombre de la canción centrado -->
+      <div class="text-sm font-medium text-center truncate px-4">
+        <span id="cancionActual"></span>
+      </div>
+
+      <!-- Selector de idioma -->
+      <select
+        onchange="cambiarIdioma(this.value)"
+        class="px-4 py-2 rounded-full bg-transparent transition"
+      >
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
+    </header>
+
+    <section
+      class="w-full h-[100vh] flex flex-col items-center justify-center text-center px-6 space-y-8 animate-fade-in"
+    >
+      <div>
+        <img src="media/proflleImage.jpg" alt="" class="w-32 h-32 rounded-full mx-auto mb-4" />
+        <h2 class="text-2xl font-bold text-white mb-2">DaNYsZ99</h2>
+        <p
+          id="textoCancion"
+          class="text-gray-300 max-w-xl mx-auto text-sm leading-relaxed"
+        >
+        There You'll Find Me
+        </p>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="flex flex-wrap justify-center gap-2 mt-4">
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@danysz99" target="_blank"
+        class="border border-white flex items-center gap-2 px-4 py-2 rounded-full text-white hover:text-[#69C9D0] hover:border-[#69C9D0] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-tiktok" viewBox="0 0 16 16">
+          <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/daniel.martinez.971392" target="_blank"
+        class="border border-white flex items-center gap-2 px-4 py-2 rounded-full text-white hover:text-[#1877F2] hover:border-[#1877F2] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        </svg>
+        <span>Facebook</span>
+      </a>
+
+      <!-- Twitter/X -->
+      <a href="https://x.com/Mtz99Daniel" target="_blank"
+        class="border border-white flex items-center gap-2 px-4 py-2 rounded-full text-white hover:text-[#1DA1F2] hover:border-[#1DA1F2] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-twitter-x" viewBox="0 0 16 16">
+          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+        </svg>
+        <span>Twitter</span>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/DanySZ9" target="_blank"
+        class="border border-white flex items-center gap-2 px-4 py-2 rounded-full text-white hover:text-[#6e5494] hover:border-[#6e5494] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-github" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+
+      <!-- Spotify -->
+      <a href="https://open.spotify.com/user/xfztxtu2s9zmhuep37tzdiof1?si=34651c49e3c64a84" target="_blank"
+        class="border border-white flex items-center gap-2 px-4 py-2 rounded-full text-white hover:text-[#1DB954] hover:border-[#1DB954] transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-spotify" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/>
+        </svg>
+        <span>Spotify</span>
+      </a>
+
+      </div>
+
+      <hr class="w-[50%]">
+
+      <div>
+        <p class="text-white text-sm">
+          Hecho con cariño por Daniel Martinez &copy; 2025
+        </p>
+      </div>
+
+      <!-- EN DESARROLLO -->
+
+    </section>
+
+    <script src="script.js"></script>
+  </body>
 </html>
