@@ -18,17 +18,12 @@ function cambiarIdioma(idioma) {
 
 // --- 🎵 Lista de canciones ---
 const canciones = [
-  { archivo: "01 Avenged Sevenfold - Beast and the Harlot.mp3", titulo: "Beast and the Harlot", artista: "Avenged Sevenfold" },
-  { archivo: "Play.mp3", titulo: "Play", artista: "BAND-MAID" },
-  { archivo: "03 Avenged Sevenfold - Scream.mp3", titulo: "Scream", artista: "Avenged Sevenfold" },
   { archivo: "04 Avenged Sevenfold - Afterlife.mp3", titulo: "Afterlife", artista: "Avenged Sevenfold" },
   { archivo: "04 Avenged Sevenfold - Bat Country.mp3", titulo: "Bat Country", artista: "Avenged Sevenfold" },
-  { archivo: "05 Avenged Sevenfold - Requiem.mp3", titulo: "Requiem", artista: "Avenged Sevenfold" },
   { archivo: "09 Avenged Sevenfold - Roman Sky.mp3", titulo: "Roman Sky", artista: "Avenged Sevenfold" },
   { archivo: "10. Bubble.mp3", titulo: "Bubble", artista: "BAND-MAID" },
   { archivo: "11. Daydreaming.mp3", titulo: "Daydreaming", artista: "BAND-MAID" },
   { archivo: "ALONE.mp3", titulo: "Alone", artista: "BAND-MAID" },
-  { archivo: "Avenged Sevenfold - Blinded in Chains.mp3", titulo: "Blinded in Chains", artista: "Avenged Sevenfold" },
   { archivo: "MORE - The Warning .mp3", titulo: "MORE", artista: "The Warning" },
   { archivo: "sayuriChocolate.mp3", titulo: "Chocolate", artista: "SAYURI" },
   { archivo: "SiM - Teardrops (Audio).mp3", titulo: "Teardrops", artista: "SiM" },
