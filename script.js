@@ -147,3 +147,11 @@ document.addEventListener("mouseout", () => {
   blurEffect.style.width = "50px";
   blurEffect.style.height = "50px";
 });
+
+function iniciarReproduccion() {
+  reproducirCancionAleatoria(); // Reproducir una canción aleatoria
+  document.body.removeEventListener("click", iniciarReproduccion); // Eliminar el evento después del primer clic
+}
+
+// Agregar el evento al body
+document.body.addEventListener("click", iniciarReproduccion);
